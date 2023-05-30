@@ -15,7 +15,7 @@ public class events implements Listener {
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        player.sendMessage(ChatColor.AQUA + "Welcome to the server");
+        player.sendMessage(ChatColor.GREEN + "'test_one' plugin successfully loaded");
     }
     @EventHandler
     public static void onRightClick(PlayerInteractEvent e){
