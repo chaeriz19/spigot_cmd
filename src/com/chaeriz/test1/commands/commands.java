@@ -32,6 +32,16 @@ public class commands implements CommandExecutor {
             player.getInventory().addItem(itemManager.wand);
         }
 
+        if (cmd.getName().equalsIgnoreCase("fly")) {
+            if (player.getAllowFlight() == true) {
+                player.setAllowFlight(false);
+                player.sendMessage("§c(X) Flight off");
+            } else {
+                player.setAllowFlight(true);
+                player.sendMessage("§a(!) Flight on");
+            }
+        }
+
         // FEED
         if (cmd.getName().equalsIgnoreCase("feed")) {
             // feed
@@ -46,15 +56,24 @@ public class commands implements CommandExecutor {
                 try {
                     EntityType entity = EntityType.valueOf(args[0].toUpperCase());
                     int amount = Integer.parseInt(args[1]);
-                    for (int i = 0; i < amount; i++) {
-                        player.getWorld().spawnEntity(player.getLocation(), entity);
+                    if (amount < 100) {
+                        for (int i = 0; i < amount; i++) {
+                            player.getWorld().spawnEntity(player.getLocation(), entity);
+                        }
+
+                        player.sendMessage("§a(!) Spawned successfully");
+                    } else {
+                        player.sendMessage("§c(X) Invalid usage: You're trying to crash");
+                        player.sendMessage("§cthe server or something? Jesus.");
+
                     }
-                    player.sendMessage("§a(!) Spawned successfully");
+
+
                 } catch (IllegalArgumentException e) {
-                    player.sendMessage("§c(X) Invalid usage: '/boom <mob> <amount>' 1");
+                    player.sendMessage("§c(X) Invalid usage: '/boom <mob> <amount>'");
                 }
             } else {
-                player.sendMessage("§c(X) Invalid usage: '/boom <mob> <amount>' 2"); return true;
+                player.sendMessage("§c(X) Invalid usage: '/boom <mob> <amount>'"); return true;
             }
             return true;
         }

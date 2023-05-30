@@ -12,6 +12,8 @@ public class test_one extends JavaPlugin {
         itemManager.init();
         commands commands = new commands();
         getServer().getPluginManager().registerEvents(new events(), this );
+        getCommand("fly").setExecutor(commands);
+
         getCommand("heal").setExecutor(commands);
         getCommand("feed").setExecutor(commands);
         getCommand("wand").setExecutor(commands);
