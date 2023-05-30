@@ -34,12 +34,17 @@ public class commands implements CommandExecutor {
                     switch (args[1]) {
                         case "owner":
                             rankManager.setRank(Rank.OWNER, target);
+                            target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
                             return true;
                         case "developer":
                             rankManager.setRank(Rank.DEVELOPER, target);
+                            target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
+
                             return true;
                         case "member":
                             rankManager.setRank(Rank.MEMBER, target);
+                            target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
+
                             return true;
                         default:
 
@@ -72,7 +77,7 @@ public class commands implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("fly")) {
             if (player.hasPermission("fly.cmd")) {
-                if (player.getAllowFlight() == true) {
+                if (player.getAllowFlight()) {
                     player.setAllowFlight(false);
                     player.sendMessage("§c(X) Flight off");
                 } else {
@@ -80,10 +85,8 @@ public class commands implements CommandExecutor {
                     player.sendMessage("§a(!) Flight on");
                 }
             } else {
-
                 player.sendMessage("§c(X) You don't have permission to use this command! If you");
                 player.sendMessage("§cbelieve this is an error, please contact an administrator");
-
             }
         }
 

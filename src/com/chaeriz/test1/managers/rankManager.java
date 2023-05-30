@@ -8,6 +8,7 @@ import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.UUID;
 
+
 public class rankManager {
 
     public static void setRank (Rank rank, Player player) {
@@ -15,12 +16,11 @@ public class rankManager {
         FileConfiguration config = main.getConfig();
 
         String uuid = player.getUniqueId().toString();
-        config.set(uuid, rank.name());
-        main.saveConfig();
-
         if (config.contains(uuid)) {
             removePermissions(player);
         }
+        config.set(uuid, rank.name());
+        main.saveConfig();
         setPermissions(player);
 
         nametagManager.setNametag(player);
@@ -44,9 +44,14 @@ public class rankManager {
         UUID uuid = player.getUniqueId();
         Rank rank = getRank(player);
 
-        for (String perm : rank.getPermissions()) {
-            test_one.getPerms().get(uuid).unsetPermission(perm);
+        PermissionAttachment attachment = test_one.getPerms().get(uuid);
+
+        if (attachment != null) {
+            for (String perm : rank.getPermissions()) {
+                test_one.getPerms().get(uuid).unsetPermission(perm);
+            }
         }
+
     }
 
     public static Rank getRank(Player player) {

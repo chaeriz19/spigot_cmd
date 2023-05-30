@@ -42,6 +42,6 @@ public class rankListeners implements Listener {
         String msg = e.getMessage();
         String username = player.getDisplayName();
         e.setCancelled(true);
-        Bukkit.broadcastMessage(rankManager.getRank(player).getPrefix() + ChatColor.WHITE + " TEST " + username);
+        Bukkit.broadcastMessage(rankManager.getRank(player).getPrefix() + ChatColor.WHITE + " " + username + ": " + msg );
     }
 }

@@ -1,26 +1,26 @@
-name: test_one
-version: 1.0
-author: chaeriz
-main: com.chaeriz.test1.test_one
-api-version: 1.14
-commands:
-  heal:
-    description: Heals player to max health
-    usage: /<command>
-    aliases: [h, healme]
-  feed:
-    description: restores player saturation to 20
-    usage: /<command>
-    aliases: [ f, feedme ]
-  boom:
-    description: spawns entities
-    usage: /<command>
-    aliases: bm
-  wand:
-    description: gives wand
-    usage: /<command>
-    aliases: wd
-  fly:
-    description: allows fly
-  setrank:
-    description: set rank
+  name: test_one
+  version: 1.0
+  author: chaeriz
+  main: com.chaeriz.test1.test_one
+  api-version: 1.14
+  commands:
+    heal:
+      description: Heals player to max health
+      usage: /<command>
+      aliases: [h, healme]
+    feed:
+      description: restores player saturation to 20
+      usage: /<command>
+      aliases: [ f, feedme ]
+    boom:
+      description: spawns entities
+      usage: /<command>
+      aliases: bm
+    wand:
+      description: gives wand
+      usage: /<command>
+      aliases: wd
+    fly:
+      description: allows fly
+    setrank:
+      description: set rank

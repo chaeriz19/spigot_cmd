@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 
 public enum Rank {
 
-    OWNER(ChatColor.RED + "OWNER", new String[]{"fly.cmd', 'heal.cmd', 'heal.cmd"}),
-    DEVELOPER(ChatColor.AQUA + "DEVELOPER", new String[]{"fly.cmd', 'heal.cmd', 'heal.cmd"}),
+    OWNER(ChatColor.RED + "OWNER", new String[]{"fly.cmd", "heal.cmd", "heal.cmd"}),
+    DEVELOPER(ChatColor.AQUA + "DEVELOPER", new String[]{"fly.cmd", "heal.cmd", "heal.cmd"}),
     MEMBER(ChatColor.GRAY + "MEMBER", new String[]{""});
 
     private String prefix;
