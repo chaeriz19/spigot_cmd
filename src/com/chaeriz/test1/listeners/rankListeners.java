@@ -22,7 +22,6 @@ public class rankListeners implements Listener {
         FileConfiguration config = main.getConfig();
         Player player = e.getPlayer();
         String uuid = player.getUniqueId().toString();
-
         if (!config.contains(uuid)) {
             rankManager.setRank(Rank.MEMBER, player);
         } else {

@@ -22,5 +22,7 @@
       aliases: wd
     fly:
       description: allows fly
+    ranks:
+      description: shows current ranks
     setrank:
       description: set rank
