@@ -1,6 +1,9 @@
 package com.chaeriz.test1.commands;
 
 import com.chaeriz.test1.items.itemManager;
+import com.chaeriz.test1.managers.rankManager;
+import com.chaeriz.test1.storage.Rank;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -17,7 +20,42 @@ public class commands implements CommandExecutor {
         if (!(commandSender instanceof Player)) {
             commandSender.sendMessage("Only players can use that command!");
             return true;}
-        Player player = (Player) commandSender;
+            Player player = (Player) commandSender;
+
+
+        // setRank
+
+        if (cmd.getName().equalsIgnoreCase("setrank")) {
+            if (!(args.length == 2)) {
+                player.sendMessage("§c(X) Invalid usage: '/setrank <player> <rank>'"); return true;
+            } else {
+                if (Bukkit.getPlayer(args[0]) != null) {
+                    Player target = Bukkit.getPlayer(args[0]);
+                    switch (args[1]) {
+                        case "owner":
+                            rankManager.setRank(Rank.OWNER, target);
+                            return true;
+                        case "developer":
+                            rankManager.setRank(Rank.DEVELOPER, target);
+                            return true;
+                        case "member":
+                            rankManager.setRank(Rank.MEMBER, target);
+                            return true;
+                        default:
+
+                            player.sendMessage("§c(X) Please select a valid rank");
+                            player.sendMessage("§cavailable ranks: owner, developer, member");
+
+                            return true;
+                    }
+                } else {
+                    player.sendMessage("§c(/setrank) Player not found'"); return true;
+                }
+            }
+
+
+        }
+
 
         // HEAL
         if (cmd.getName().equalsIgnoreCase("heal")) {
@@ -33,12 +71,19 @@ public class commands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("fly")) {
-            if (player.getAllowFlight() == true) {
-                player.setAllowFlight(false);
-                player.sendMessage("§c(X) Flight off");
+            if (player.hasPermission("fly.cmd")) {
+                if (player.getAllowFlight() == true) {
+                    player.setAllowFlight(false);
+                    player.sendMessage("§c(X) Flight off");
+                } else {
+                    player.setAllowFlight(true);
+                    player.sendMessage("§a(!) Flight on");
+                }
             } else {
-                player.setAllowFlight(true);
-                player.sendMessage("§a(!) Flight on");
+
+                player.sendMessage("§c(X) You don't have permission to use this command! If you");
+                player.sendMessage("§cbelieve this is an error, please contact an administrator");
+
             }
         }
 

@@ -22,3 +22,5 @@ commands:
     aliases: wd
   fly:
     description: allows fly
+  setrank:
+    description: set rank
